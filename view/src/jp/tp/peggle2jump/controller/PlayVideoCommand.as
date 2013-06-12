@@ -6,6 +6,7 @@ package jp.tp.peggle2jump.controller
 	import flash.geom.Rectangle;
 	
 	import jp.tp.peggle2jump.view.component.VideoWindow;
+	import jp.tp.peggle2jump.view.mediator.VideoConfWindowMediator;
 	import jp.tp.peggle2jump.view.mediator.VideoPlayWindowMediator;
 	import jp.tp.peggle2jump.model.proxy.ConfigProxy;
 	
@@ -20,8 +21,10 @@ package jp.tp.peggle2jump.controller
 		}
 		override public function execute(n:INotification):void
 		{
-			var med:IMediator = facade.retrieveMediator(VideoPlayWindowMediator.NAME);
-			if(med) return;
+			//再生/設定ウィンドウが開いていたら再生しない
+			if(facade.retrieveMediator(VideoPlayWindowMediator.NAME)
+				|| facade.retrieveMediator(VideoConfWindowMediator.NAME)
+			) return;
 			
 			var initOptions:NativeWindowInitOptions = new NativeWindowInitOptions;
 			initOptions.systemChrome = NativeWindowSystemChrome.NONE;
