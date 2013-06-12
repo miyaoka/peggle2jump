@@ -36,7 +36,7 @@
 			 new spark.filters.DropShadowFilter(0,0,0xff7c18,1,2,2,5)
 			 ]}"/>
 	<s:Label id="caption" color="#F6FF00" fontFamily="Arial" fontSize="16" horizontalCenter="0"
-			 mouseEnabled="false" text="Set window position and size, then close."
+			 mouseEnabled="false" text="Set window size and position, then close."
 			 verticalCenter="0"/>
 	<s:Button id="preview" label="preview" horizontalCenter="0" verticalCenter="24"/>
 </s:Group>
