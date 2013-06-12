@@ -1,0 +1,15 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+
+@font-face {
+	src:url("assets/fonts/SF Slapstick Comic Shaded Oblique.ttf");
+	fontFamily: myFontFamily;
+	embedAsCFF: true;
+}
+
+#clock {
+	fontFamily: myFontFamily;
+	color:#ff0;
+}     

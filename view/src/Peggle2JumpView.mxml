@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   addedToStage="windowedapplication1_addedToStageHandler(event)"
+					   creationComplete="windowedapplication1_creationCompleteHandler(event)"
+					   autoExit="false"
+					   visible="false">
+	<fx:Style source="style.css"/>
+	<fx:Script>
+		<![CDATA[
+			import jp.tp.peggle2jump.ApplicationFacade;
+			
+			import mx.events.FlexEvent;
+			protected function windowedapplication1_addedToStageHandler(event:Event):void
+			{
+				//close default windowed app(this)
+				close();
+			}
+			
+			protected function windowedapplication1_creationCompleteHandler(event:FlexEvent):void
+			{
+				ApplicationFacade.getInstance().startup(this);
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- 非ビジュアルエレメント (サービス、値オブジェクトなど) をここに配置 -->
+	</fx:Declarations>
+</s:WindowedApplication>
