@@ -34,7 +34,9 @@ package jp.tp.peggle2jump.view.mediator
 		}
 		override public function onRemove():void
 		{
-			
+			view.removeEventListener(Event.CLOSING, onWindowClosing);
+			view.container.preview.removeEventListener(FlexEvent.BUTTON_DOWN, onPreviewButtonDown);
+			view.video.removeEventListener(MouseEvent.MOUSE_DOWN, onVideoMouseDown);
 		}
 		override public function listNotificationInterests():Array
 		{
@@ -53,19 +55,18 @@ package jp.tp.peggle2jump.view.mediator
 		}		
 		private function onWindowClosing(e:Event):void
 		{
-			view.video.source = null;
-			view.removeEventListener(Event.CLOSING, onWindowClosing);
-			view.container.preview.removeEventListener(FlexEvent.BUTTON_DOWN, onPreviewButtonDown);
-			view.video.removeEventListener(MouseEvent.MOUSE_DOWN, onVideoMouseDown);
-			
-			saveBounds();
-			facade.removeMediator(NAME);
+			removeMediator();
 		}
 		private function onPreviewButtonDown(e:FlexEvent):void
 		{
-			view.close();
-			onWindowClosing(null);
+			removeMediator();
 			sendNotification(AppConstants.PLAY_VIDEO);
+			view.close();
+		}
+		private function removeMediator():void
+		{
+			saveBounds();
+			facade.removeMediator(NAME);
 		}
 		private function saveBounds():void
 		{

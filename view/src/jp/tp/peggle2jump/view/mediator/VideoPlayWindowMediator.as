@@ -32,7 +32,6 @@ package jp.tp.peggle2jump.view.mediator
 			//evt
 			view.video.addEventListener(TimeEvent.CURRENT_TIME_CHANGE, onVideoTimeChange);
 			view.video.addEventListener(TimeEvent.COMPLETE, onVideoComplete);
-			view.video.addEventListener(MediaPlayerStateChangeEvent.MEDIA_PLAYER_STATE_CHANGE, onVideoStageChange);
 			view.video.addEventListener(MouseEvent.MOUSE_DOWN, onVideoMouseDown);
 			view.addEventListener(Event.CLOSING, onWindowClosing);
 			view.addEventListener(FlexNativeWindowEvent.DRAG_MOVE, onWindowMove);
@@ -44,12 +43,18 @@ package jp.tp.peggle2jump.view.mediator
 			view.container.caption.visible = false;
 			view.container.preview.visible = false;
 			
+			view.video.autoPlay = true
 			
 			view.activate();
 		}
 		override public function onRemove():void
 		{
-			
+			view.video.stop();
+			view.video.removeEventListener(TimeEvent.CURRENT_TIME_CHANGE, onVideoTimeChange);
+			view.video.removeEventListener(TimeEvent.COMPLETE, onVideoComplete);
+			view.video.removeEventListener(MouseEvent.MOUSE_DOWN, onVideoMouseDown);
+			view.removeEventListener(Event.CLOSING, onWindowClosing);
+			view.removeEventListener(FlexNativeWindowEvent.DRAG_MOVE, onWindowMove);
 		}
 		override public function listNotificationInterests():Array
 		{
@@ -74,13 +79,6 @@ package jp.tp.peggle2jump.view.mediator
 		{
 			view.startDrag();
 		}
-		private function onVideoStageChange(e:MediaPlayerStateChangeEvent):void
-		{
-			if(e.state == MediaPlayerState.READY)
-			{
-				view.video.play();
-			}
-		}
 		private function onVideoTimeChange(e:TimeEvent):void
 		{
 			if(e.time > 4.1)
@@ -96,17 +94,15 @@ package jp.tp.peggle2jump.view.mediator
 		}
 		private function close():void
 		{
-			view.video.source = null;
-			view.video.removeEventListener(TimeEvent.CURRENT_TIME_CHANGE, onVideoTimeChange);
-			view.video.removeEventListener(TimeEvent.COMPLETE, onVideoComplete);
-			view.video.removeEventListener(MediaPlayerStateChangeEvent.MEDIA_PLAYER_STATE_CHANGE, onVideoStageChange);
-			view.video.removeEventListener(MouseEvent.MOUSE_DOWN, onVideoMouseDown);
+			removeMediator();
 			view.close();
-			onWindowClosing(null);
 		}
 		private function onWindowClosing(e:Event):void
 		{
-			view.removeEventListener(Event.CLOSING, onWindowClosing);
+			removeMediator();
+		}
+		private function removeMediator():void
+		{
 			facade.removeMediator(NAME);
 		}
 		private function onWindowMove(e:FlexNativeWindowEvent):void
