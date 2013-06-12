@@ -39,7 +39,7 @@ package jp.tp.peggle2jump.controller
 			//（初回設定中に時報で起動するケース）
 			if(!b) return;
 
-			win.bounds = cp.bounds;
+			win.bounds = b;
 			
 			facade.registerMediator(new VideoPlayWindowMediator(win));
 		}		

@@ -44,6 +44,9 @@ package jp.tp.peggle2jump.view.mediator
 			view.container.preview.visible = false;
 			
 			view.video.autoPlay = true
+				
+			//windowsの透明窓だとコンテナのwidthが正しく設定されないようなのでここで時刻のfontsizeを設定する
+			view.container.clock.setStyle("fontSize", view.width * 0.2);
 			
 			view.activate();
 		}
