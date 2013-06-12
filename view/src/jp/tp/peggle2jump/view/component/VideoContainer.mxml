@@ -30,7 +30,7 @@
 	<s:VideoDisplay id="video" width="100%" height="100%" horizontalCenter="0"
 					source="assets/video/peggle2.flv" verticalCenter="0" autoPlay="false" autoRewind="false"/>
 	<s:Label id="clock" visible="false" horizontalCenter="0" mouseEnabled="false" styleName="clock" text="{dateLabel()}"
-			 verticalCenter="0" fontSize="{width * 0.2}"
+			 verticalCenter="{height * -0.15}" fontSize="{width * 0.2}"
 			 filters="{[
 			 new spark.filters.GlowFilter(0xffffff, 1.0, 10, 10, 10),
 			 new spark.filters.DropShadowFilter(0,0,0xff7c18,1,2,2,5)
