@@ -110,7 +110,7 @@ package jp.tp.peggle2jump.view.mediator
 		private function loadIcons():void
 		{
 			var bmds:Array = [];
-			var sizes:Array = [16, 32, 48, 128, 512];
+			var sizes:Array = [16, 32, 48, 128];
 			loadIcon(sizes, bmds);
 		}
 		private function loadIcon(sizes:Array, bmds:Array):void
