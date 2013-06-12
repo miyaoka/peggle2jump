@@ -49,7 +49,13 @@ package jp.tp.peggle2jump.view.mediator
 		}
 		override public function onRemove():void
 		{
-			
+			view.video.stop();
+			view.video.removeEventListener(TimeEvent.CURRENT_TIME_CHANGE, onVideoTimeChange);
+			view.video.removeEventListener(TimeEvent.COMPLETE, onVideoComplete);
+			view.video.removeEventListener(MediaPlayerStateChangeEvent.MEDIA_PLAYER_STATE_CHANGE, onVideoStageChange);
+			view.video.removeEventListener(MouseEvent.MOUSE_DOWN, onVideoMouseDown);
+			view.removeEventListener(Event.CLOSING, onWindowClosing);
+			view.removeEventListener(FlexNativeWindowEvent.DRAG_MOVE, onWindowMove);
 		}
 		override public function listNotificationInterests():Array
 		{
@@ -96,17 +102,15 @@ package jp.tp.peggle2jump.view.mediator
 		}
 		private function close():void
 		{
-			view.video.source = null;
-			view.video.removeEventListener(TimeEvent.CURRENT_TIME_CHANGE, onVideoTimeChange);
-			view.video.removeEventListener(TimeEvent.COMPLETE, onVideoComplete);
-			view.video.removeEventListener(MediaPlayerStateChangeEvent.MEDIA_PLAYER_STATE_CHANGE, onVideoStageChange);
-			view.video.removeEventListener(MouseEvent.MOUSE_DOWN, onVideoMouseDown);
+			removeMediator();
 			view.close();
-			onWindowClosing(null);
 		}
 		private function onWindowClosing(e:Event):void
 		{
-			view.removeEventListener(Event.CLOSING, onWindowClosing);
+			removeMediator();
+		}
+		private function removeMediator():void
+		{
 			facade.removeMediator(NAME);
 		}
 		private function onWindowMove(e:FlexNativeWindowEvent):void
