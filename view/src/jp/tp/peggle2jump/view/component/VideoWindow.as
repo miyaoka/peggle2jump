@@ -12,6 +12,8 @@ package jp.tp.peggle2jump.view.component
 		{
 			super(initOptions);
 			
+			alwaysInFront = true;
+			
 			//UIComponent追加
 			container = new VideoContainer;
 			addChildControls(container);
