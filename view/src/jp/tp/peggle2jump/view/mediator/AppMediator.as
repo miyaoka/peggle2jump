@@ -97,11 +97,17 @@ package jp.tp.peggle2jump.view.mediator
 			initMenu.addEventListener(Event.SELECT, onSelectInit);
 			resetMenu.addEventListener(Event.SELECT, onSelectReset);
 			quitMenu.addEventListener(Event.SELECT, onSelectQuit);
+			var appXml:XML = NativeApplication.nativeApplication.applicationDescriptor;
+			var ns:Namespace = appXml.namespace();
+			
+			versionMenu.label = appXml.ns::name + " v" + appXml.ns::versionNumber; 
 			
 			var iconMenu:NativeMenu = new NativeMenu();
 			iconMenu.addItem(jumpMenu);
 			iconMenu.addItem(initMenu);
 			iconMenu.addItem(resetMenu);
+			iconMenu.addItem(new NativeMenuItem("", true));//Separator
+			iconMenu.addItem(versionMenu);
 			iconMenu.addItem(new NativeMenuItem("", true));//Separator
 			iconMenu.addItem(quitMenu);
 			
@@ -135,6 +141,7 @@ package jp.tp.peggle2jump.view.mediator
 		private var jumpMenu:NativeMenuItem = new NativeMenuItem("Jump now!!");
 		private var initMenu:NativeMenuItem = new NativeMenuItem("Set size and position");
 		private var resetMenu:NativeMenuItem = new NativeMenuItem("Reset position");
+		private var versionMenu:NativeMenuItem = new NativeMenuItem();
 		private function onSelectJump(e:Event):void
 		{
 			sendNotification(AppConstants.PLAY_VIDEO);
