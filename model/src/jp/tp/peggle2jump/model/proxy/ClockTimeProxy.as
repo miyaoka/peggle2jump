@@ -1,4 +1,4 @@
-package jp.tp.qlclock.model.proxy
+package jp.tp.peggle2jump.model.proxy
 {
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;

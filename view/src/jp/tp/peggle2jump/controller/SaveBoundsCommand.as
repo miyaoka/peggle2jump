@@ -2,7 +2,7 @@ package jp.tp.peggle2jump.controller
 {
 	import flash.geom.Rectangle;
 	
-	import jp.tp.qlclock.model.proxy.ConfigProxy;
+	import jp.tp.peggle2jump.model.proxy.ConfigProxy;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;

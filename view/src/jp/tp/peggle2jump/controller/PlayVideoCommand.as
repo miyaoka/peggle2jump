@@ -7,7 +7,7 @@ package jp.tp.peggle2jump.controller
 	
 	import jp.tp.peggle2jump.view.component.VideoWindow;
 	import jp.tp.peggle2jump.view.mediator.VideoPlayWindowMediator;
-	import jp.tp.qlclock.model.proxy.ConfigProxy;
+	import jp.tp.peggle2jump.model.proxy.ConfigProxy;
 	
 	import org.puremvc.as3.interfaces.IMediator;
 	import org.puremvc.as3.interfaces.INotification;
