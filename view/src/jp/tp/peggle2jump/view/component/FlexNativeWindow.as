@@ -31,6 +31,23 @@ package jp.tp.peggle2jump.view.component
 		public function addChildControls(control:IUIComponent):void
 		{
 			_content = control;
+			addSystemManager();
+		}
+		private function addSystemManager():void
+		{
+			if(stage)
+			{
+				//* create a WindowedSystemManager to hold the content
+				if(!_systemManager)
+				{
+					//*    Create a system manager
+					_systemManager = new WindowedSystemManager(_content);
+					//* Add the content to the stage
+					stage.addChild(_systemManager);
+					//* Add in a resize event listener
+					stage.addEventListener(Event.RESIZE, windowResizeHandler);
+				}
+			}
 		}
 		
 		//* This handler actually adds the content to the NativeWindow
@@ -44,21 +61,10 @@ package jp.tp.peggle2jump.view.component
 			//* Create the children and add an event listener for re-sizing the window
 			if(stage)
 			{
-				//* create a WindowedSystemManager to hold the content
-				if(!_systemManager)
-				{
-					//*    Create a system manager
-					_systemManager = new WindowedSystemManager(_content);
-				}
-				
-				//* Add the content to the stage
-				stage.addChild(_systemManager);
+				addSystemManager();
 				
 				//* Dispatch a creation complete event
 				dispatchEvent(new FlexEvent(FlexEvent.CREATION_COMPLETE));
-				
-				//* Add in a resize event listener
-				stage.addEventListener(Event.RESIZE, windowResizeHandler);
 			}
 		}
 		
