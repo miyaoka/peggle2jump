@@ -94,12 +94,14 @@ package jp.tp.peggle2jump.view.mediator
 		private function createIconMenu():NativeMenu
 		{
 			jumpMenu.addEventListener(Event.SELECT, onSelectJump);
-			restoreMenu.addEventListener(Event.SELECT, onSelectInit);
+			initMenu.addEventListener(Event.SELECT, onSelectInit);
+			resetMenu.addEventListener(Event.SELECT, onSelectReset);
 			quitMenu.addEventListener(Event.SELECT, onSelectQuit);
 			
 			var iconMenu:NativeMenu = new NativeMenu();
 			iconMenu.addItem(jumpMenu);
-			iconMenu.addItem(restoreMenu);
+			iconMenu.addItem(initMenu);
+			iconMenu.addItem(resetMenu);
 			iconMenu.addItem(new NativeMenuItem("", true));//Separator
 			iconMenu.addItem(quitMenu);
 			
@@ -131,7 +133,8 @@ package jp.tp.peggle2jump.view.mediator
 	
 		private var quitMenu:NativeMenuItem = new NativeMenuItem("Quit");
 		private var jumpMenu:NativeMenuItem = new NativeMenuItem("Jump now!!");
-		private var restoreMenu:NativeMenuItem = new NativeMenuItem("Set size and position");
+		private var initMenu:NativeMenuItem = new NativeMenuItem("Set size and position");
+		private var resetMenu:NativeMenuItem = new NativeMenuItem("Reset position");
 		private function onSelectJump(e:Event):void
 		{
 			sendNotification(AppConstants.PLAY_VIDEO);
@@ -143,6 +146,10 @@ package jp.tp.peggle2jump.view.mediator
 		private function onSelectQuit(e:Event):void
 		{
 			view.nativeApplication.exit();
+		}
+		private function onSelectReset(e:Event):void
+		{
+			sendNotification(AppConstants.RESET_BOUNDS);
 		}
 	}
 }
