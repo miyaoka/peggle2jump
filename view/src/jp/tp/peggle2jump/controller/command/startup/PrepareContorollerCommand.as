@@ -1,7 +1,8 @@
 package jp.tp.peggle2jump.controller.command.startup
 {
-	import jp.tp.peggle2jump.controller.PlayVideoCommand;
 	import jp.tp.peggle2jump.controller.InitBoundsCommand;
+	import jp.tp.peggle2jump.controller.PlayVideoCommand;
+	import jp.tp.peggle2jump.controller.ResetBoundsCommand;
 	import jp.tp.peggle2jump.controller.SaveBoundsCommand;
 	import jp.tp.peggle2jump.controller.constant.AppConstants;
 	
@@ -15,6 +16,7 @@ package jp.tp.peggle2jump.controller.command.startup
 			facade.registerCommand(AppConstants.SAVE_BOUNDS, SaveBoundsCommand);
 			facade.registerCommand(AppConstants.PLAY_VIDEO, PlayVideoCommand);
 			facade.registerCommand(AppConstants.INIT_BOUNDS, InitBoundsCommand);
+			facade.registerCommand(AppConstants.RESET_BOUNDS, ResetBoundsCommand);
 		}
 	}
 }

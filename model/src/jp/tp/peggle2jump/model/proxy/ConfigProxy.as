@@ -1,4 +1,4 @@
-package jp.tp.qlclock.model.proxy
+package jp.tp.peggle2jump.model.proxy
 {
 	import flash.geom.Rectangle;
 	import flash.net.SharedObject;
@@ -61,6 +61,10 @@ package jp.tp.qlclock.model.proxy
 			so.data.bounds = value;
 			save();
 			sendNotification(UPDATE_BOUNDS, bounds);
+		}
+		public function resetBounds():void
+		{
+			bounds = _defaultBounds.clone();
 		}
 	}
 }

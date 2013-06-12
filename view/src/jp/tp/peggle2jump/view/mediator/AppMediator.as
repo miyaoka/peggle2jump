@@ -13,8 +13,8 @@ package jp.tp.peggle2jump.view.mediator
 	import flash.net.URLRequest;
 	
 	import jp.tp.peggle2jump.controller.constant.AppConstants;
-	import jp.tp.qlclock.model.proxy.ClockTimeProxy;
-	import jp.tp.qlclock.model.proxy.ConfigProxy;
+	import jp.tp.peggle2jump.model.proxy.ClockTimeProxy;
+	import jp.tp.peggle2jump.model.proxy.ConfigProxy;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
@@ -94,12 +94,20 @@ package jp.tp.peggle2jump.view.mediator
 		private function createIconMenu():NativeMenu
 		{
 			jumpMenu.addEventListener(Event.SELECT, onSelectJump);
-			restoreMenu.addEventListener(Event.SELECT, onSelectInit);
+			initMenu.addEventListener(Event.SELECT, onSelectInit);
+			resetMenu.addEventListener(Event.SELECT, onSelectReset);
 			quitMenu.addEventListener(Event.SELECT, onSelectQuit);
+			var appXml:XML = NativeApplication.nativeApplication.applicationDescriptor;
+			var ns:Namespace = appXml.namespace();
+			
+			versionMenu.label = appXml.ns::name + " v" + appXml.ns::versionNumber; 
 			
 			var iconMenu:NativeMenu = new NativeMenu();
 			iconMenu.addItem(jumpMenu);
-			iconMenu.addItem(restoreMenu);
+			iconMenu.addItem(initMenu);
+			iconMenu.addItem(resetMenu);
+			iconMenu.addItem(new NativeMenuItem("", true));//Separator
+			iconMenu.addItem(versionMenu);
 			iconMenu.addItem(new NativeMenuItem("", true));//Separator
 			iconMenu.addItem(quitMenu);
 			
@@ -108,7 +116,7 @@ package jp.tp.peggle2jump.view.mediator
 		private function loadIcons():void
 		{
 			var bmds:Array = [];
-			var sizes:Array = [16, 32, 48, 128, 512];
+			var sizes:Array = [16, 32, 48, 128];
 			loadIcon(sizes, bmds);
 		}
 		private function loadIcon(sizes:Array, bmds:Array):void
@@ -131,7 +139,9 @@ package jp.tp.peggle2jump.view.mediator
 	
 		private var quitMenu:NativeMenuItem = new NativeMenuItem("Quit");
 		private var jumpMenu:NativeMenuItem = new NativeMenuItem("Jump now!!");
-		private var restoreMenu:NativeMenuItem = new NativeMenuItem("Set Size & Position");
+		private var initMenu:NativeMenuItem = new NativeMenuItem("Set size and position");
+		private var resetMenu:NativeMenuItem = new NativeMenuItem("Reset position");
+		private var versionMenu:NativeMenuItem = new NativeMenuItem();
 		private function onSelectJump(e:Event):void
 		{
 			sendNotification(AppConstants.PLAY_VIDEO);
@@ -143,6 +153,10 @@ package jp.tp.peggle2jump.view.mediator
 		private function onSelectQuit(e:Event):void
 		{
 			view.nativeApplication.exit();
+		}
+		private function onSelectReset(e:Event):void
+		{
+			sendNotification(AppConstants.RESET_BOUNDS);
 		}
 	}
 }
