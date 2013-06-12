@@ -112,7 +112,7 @@ package jp.tp.peggle2jump.view.mediator
 			sendNotification(AppConstants.SAVE_BOUNDS, new Rectangle(pt.x, pt.y, v.width, v.height));
 		}
 		private var quitMenu:NativeMenuItem = new NativeMenuItem("Close");
-		private var restoreMenu:NativeMenuItem = new NativeMenuItem("Set Size & Position");
+		private var restoreMenu:NativeMenuItem = new NativeMenuItem("Set size and position");
 		private function initMenu():NativeMenu
 		{
 			restoreMenu.addEventListener(Event.SELECT, onSelectInit);

@@ -131,7 +131,7 @@ package jp.tp.peggle2jump.view.mediator
 	
 		private var quitMenu:NativeMenuItem = new NativeMenuItem("Quit");
 		private var jumpMenu:NativeMenuItem = new NativeMenuItem("Jump now!!");
-		private var restoreMenu:NativeMenuItem = new NativeMenuItem("Set Size & Position");
+		private var restoreMenu:NativeMenuItem = new NativeMenuItem("Set size and position");
 		private function onSelectJump(e:Event):void
 		{
 			sendNotification(AppConstants.PLAY_VIDEO);
