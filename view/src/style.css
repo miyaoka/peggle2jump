@@ -4,12 +4,12 @@
 
 
 @font-face {
-	src:url("assets/fonts/SF Slapstick Comic Shaded Oblique.ttf");
-	fontFamily: myFontFamily;
+	src:url("assets/fonts/merititalic4.ttf");
+	fontFamily: meritItalic;
 	embedAsCFF: true;
 }
 
 #clock {
-	fontFamily: myFontFamily;
-	color:#ff0;
+	fontFamily: meritItalic;
+	color:#ff7c18;
 }     
