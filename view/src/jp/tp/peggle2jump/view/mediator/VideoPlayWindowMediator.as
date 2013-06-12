@@ -32,7 +32,6 @@ package jp.tp.peggle2jump.view.mediator
 			//evt
 			view.video.addEventListener(TimeEvent.CURRENT_TIME_CHANGE, onVideoTimeChange);
 			view.video.addEventListener(TimeEvent.COMPLETE, onVideoComplete);
-			view.video.addEventListener(MediaPlayerStateChangeEvent.MEDIA_PLAYER_STATE_CHANGE, onVideoStageChange);
 			view.video.addEventListener(MouseEvent.MOUSE_DOWN, onVideoMouseDown);
 			view.addEventListener(Event.CLOSING, onWindowClosing);
 			view.addEventListener(FlexNativeWindowEvent.DRAG_MOVE, onWindowMove);
@@ -44,6 +43,7 @@ package jp.tp.peggle2jump.view.mediator
 			view.container.caption.visible = false;
 			view.container.preview.visible = false;
 			
+			view.video.autoPlay = true
 			
 			view.activate();
 		}
@@ -52,7 +52,6 @@ package jp.tp.peggle2jump.view.mediator
 			view.video.stop();
 			view.video.removeEventListener(TimeEvent.CURRENT_TIME_CHANGE, onVideoTimeChange);
 			view.video.removeEventListener(TimeEvent.COMPLETE, onVideoComplete);
-			view.video.removeEventListener(MediaPlayerStateChangeEvent.MEDIA_PLAYER_STATE_CHANGE, onVideoStageChange);
 			view.video.removeEventListener(MouseEvent.MOUSE_DOWN, onVideoMouseDown);
 			view.removeEventListener(Event.CLOSING, onWindowClosing);
 			view.removeEventListener(FlexNativeWindowEvent.DRAG_MOVE, onWindowMove);
@@ -79,13 +78,6 @@ package jp.tp.peggle2jump.view.mediator
 		private function onVideoMouseDown(e:MouseEvent):void
 		{
 			view.startDrag();
-		}
-		private function onVideoStageChange(e:MediaPlayerStateChangeEvent):void
-		{
-			if(e.state == MediaPlayerState.READY)
-			{
-				view.video.play();
-			}
 		}
 		private function onVideoTimeChange(e:TimeEvent):void
 		{
