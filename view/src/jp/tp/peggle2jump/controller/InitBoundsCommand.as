@@ -4,6 +4,7 @@ package jp.tp.peggle2jump.controller
 	import flash.display.NativeWindowType;
 	import flash.geom.Rectangle;
 	
+	import jp.tp.peggle2jump.controller.constant.AppConstants;
 	import jp.tp.peggle2jump.model.proxy.ConfigProxy;
 	import jp.tp.peggle2jump.view.component.VideoWindow;
 	import jp.tp.peggle2jump.view.mediator.VideoConfWindowMediator;
@@ -22,6 +23,9 @@ package jp.tp.peggle2jump.controller
 		{
 			var med:IMediator = facade.retrieveMediator(VideoConfWindowMediator.NAME);
 			if(med) return;
+			
+			//再生中のプレイヤーを閉じる
+			sendNotification(AppConstants.CLOSE_VIDEO);
 
 			var initOptions:NativeWindowInitOptions = new NativeWindowInitOptions;
 			initOptions.type = NativeWindowType.UTILITY;

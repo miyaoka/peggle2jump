@@ -54,12 +54,16 @@ package jp.tp.peggle2jump.view.mediator
 		override public function listNotificationInterests():Array
 		{
 			return [
+				AppConstants.CLOSE_VIDEO
 			];
 		}
 		override public function handleNotification(n:INotification):void
 		{
 			switch(n.getName())
 			{
+				case AppConstants.CLOSE_VIDEO:
+					close();
+					break;
 			}
 		}	
 		private function get view():VideoWindow
@@ -127,7 +131,6 @@ package jp.tp.peggle2jump.view.mediator
 		private function onSelectInit(e:Event):void
 		{
 			sendNotification(AppConstants.INIT_BOUNDS);
-			close();
 		}
 		private function onSelectQuit(e:Event):void
 		{
