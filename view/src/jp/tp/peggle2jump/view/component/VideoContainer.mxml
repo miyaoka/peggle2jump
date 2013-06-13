@@ -23,7 +23,8 @@
 		<!-- 非ビジュアルエレメント (サービス、値オブジェクトなど) をここに配置 -->
 	</fx:Declarations>
 	<s:VideoDisplay id="video" width="100%" height="100%" horizontalCenter="0"
-					source="assets/video/peggle2.flv" verticalCenter="0" autoPlay="false" autoRewind="false"/>
+					source="assets/video/peggle2.flv" verticalCenter="0" autoPlay="false" autoRewind="false"
+					pauseWhenHidden="false"/>
 	<s:Label id="clock" visible="false" horizontalCenter="0" mouseEnabled="false" styleName="clock" text="{dateLabel()}"
 			 verticalCenter="0"
 			 filters="{[
