@@ -21,6 +21,7 @@ package jp.tp.peggle2jump.view.component
 		{
 			super(initOptions);
 			addEventListener(Event.ACTIVATE, windowActivateHandler);
+			addEventListener(Event.CLOSE, onClose);
 		}
 		
 		private var _systemManager:WindowedSystemManager;
@@ -32,6 +33,20 @@ package jp.tp.peggle2jump.view.component
 		{
 			_content = control;
 			addSystemManager();
+		}
+		private function onClose(e:Event):void
+		{
+			removeEventListener(Event.CLOSE, onClose);
+			removeEventListener(Event.ACTIVATE, windowActivateHandler);
+			_content = null;
+			_systemManager = null;
+			if(stage)
+			{
+				stage.removeChildren();
+				stage.removeEventListener(Event.RESIZE, windowResizeHandler);
+				stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseDragMove);
+				stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseDragUp);			
+			}
 		}
 		private function addSystemManager():void
 		{

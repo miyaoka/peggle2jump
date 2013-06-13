@@ -60,8 +60,6 @@ package jp.tp.peggle2jump.view.mediator
 			view.video.removeEventListener(TimeEvent.DURATION_CHANGE, onDurationChange);
 			view.removeEventListener(Event.CLOSING, onWindowClosing);
 			view.removeEventListener(FlexNativeWindowEvent.DRAG_MOVE, onWindowMove);
-			
-			view.close();
 		}
 		override public function listNotificationInterests():Array
 		{
@@ -131,12 +129,19 @@ package jp.tp.peggle2jump.view.mediator
 		}
 		private function onVideoComplete(e:TimeEvent):void
 		{
-			close();
+			closeView();
 		}
-		private function close():void
+		/**
+		 * mediator側からviewをcloseする
+		 */ 
+		private function closeView():void
 		{
 			removeMediator();
+			view.close();
 		}
+		/**
+		 * 外部からviewがcloseされたとき
+		 */ 
 		private function onWindowClosing(e:Event):void
 		{
 			removeMediator();
@@ -170,7 +175,7 @@ package jp.tp.peggle2jump.view.mediator
 		}
 		private function onSelectQuit(e:Event):void
 		{
-			close();
+			closeView();
 		}		
 	}
 }
