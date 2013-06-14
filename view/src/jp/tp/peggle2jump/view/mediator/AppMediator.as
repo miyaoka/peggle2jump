@@ -40,15 +40,15 @@ package jp.tp.peggle2jump.view.mediator
 		override public function listNotificationInterests():Array
 		{
 			return [
-				ClockTimeProxy.TIME_UPDATED
+				ClockTimeProxy.HOUR_UPDATE
 				];
 		}
 		override public function handleNotification(n:INotification):void
 		{
 			switch(n.getName())
 			{
-				case ClockTimeProxy.TIME_UPDATED:
-					onTimeUpdate();
+				case ClockTimeProxy.HOUR_UPDATE:
+					playVideo();
 					break;
 			}
 			
@@ -57,7 +57,7 @@ package jp.tp.peggle2jump.view.mediator
 		{
 			return viewComponent as Peggle2JumpView;
 		}
-		private function onTimeUpdate():void
+		private function playVideo():void
 		{
 			sendNotification(AppConstants.PLAY_VIDEO);
 		}
