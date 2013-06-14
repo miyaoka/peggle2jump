@@ -12,6 +12,7 @@ package jp.tp.peggle2jump.view.mediator
 	import flash.system.Capabilities;
 	
 	import jp.tp.peggle2jump.controller.constant.AppConstants;
+	import jp.tp.peggle2jump.model.proxy.ClockTimeProxy;
 	import jp.tp.peggle2jump.view.component.VideoWindow;
 	import jp.tp.peggle2jump.view.event.FlexNativeWindowEvent;
 	
@@ -64,7 +65,8 @@ package jp.tp.peggle2jump.view.mediator
 		override public function listNotificationInterests():Array
 		{
 			return [
-				AppConstants.CLOSE_VIDEO
+				AppConstants.CLOSE_VIDEO,
+				ClockTimeProxy.MINUTE_UPDATE
 			];
 		}
 		override public function handleNotification(n:INotification):void
@@ -74,12 +76,19 @@ package jp.tp.peggle2jump.view.mediator
 				case AppConstants.CLOSE_VIDEO:
 //					close();
 					break;
+				case ClockTimeProxy.MINUTE_UPDATE:
+					updateClock();
+					break;
 			}
 		}	
 		private function get view():VideoWindow
 		{
 			return viewComponent as VideoWindow;
 		}		
+		private function updateClock():void
+		{
+			view.container.date = new Date();
+		}
 		private function onVideoMouseDown(e:MouseEvent):void
 		{
 			view.startDrag();
