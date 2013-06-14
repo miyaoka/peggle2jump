@@ -11,6 +11,7 @@ package jp.tp.peggle2jump.view.mediator
 	import flash.events.Event;
 	import flash.filesystem.File;
 	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
 	
 	import jp.tp.peggle2jump.controller.constant.AppConstants;
 	import jp.tp.peggle2jump.model.proxy.ClockTimeProxy;
@@ -39,15 +40,15 @@ package jp.tp.peggle2jump.view.mediator
 		override public function listNotificationInterests():Array
 		{
 			return [
-				ClockTimeProxy.TIME_UPDATED
+				ClockTimeProxy.HOUR_UPDATE
 				];
 		}
 		override public function handleNotification(n:INotification):void
 		{
 			switch(n.getName())
 			{
-				case ClockTimeProxy.TIME_UPDATED:
-					onTimeUpdate();
+				case ClockTimeProxy.HOUR_UPDATE:
+					playVideo();
 					break;
 			}
 			
@@ -56,7 +57,7 @@ package jp.tp.peggle2jump.view.mediator
 		{
 			return viewComponent as Peggle2JumpView;
 		}
-		private function onTimeUpdate():void
+		private function playVideo():void
 		{
 			sendNotification(AppConstants.PLAY_VIDEO);
 		}
@@ -97,6 +98,8 @@ package jp.tp.peggle2jump.view.mediator
 			initMenu.addEventListener(Event.SELECT, onSelectInit);
 			resetMenu.addEventListener(Event.SELECT, onSelectReset);
 			quitMenu.addEventListener(Event.SELECT, onSelectQuit);
+			versionMenu.addEventListener(Event.SELECT, onSelectVersion);
+			
 			var appXml:XML = NativeApplication.nativeApplication.applicationDescriptor;
 			var ns:Namespace = appXml.namespace();
 			
@@ -157,6 +160,10 @@ package jp.tp.peggle2jump.view.mediator
 		private function onSelectReset(e:Event):void
 		{
 			sendNotification(AppConstants.RESET_BOUNDS);
+		}
+		private function onSelectVersion(e:Event):void
+		{
+			sendNotification(AppConstants.NAV_TO_SITE);
 		}
 	}
 }

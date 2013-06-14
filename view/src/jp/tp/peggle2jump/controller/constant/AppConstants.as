@@ -8,5 +8,6 @@ package jp.tp.peggle2jump.controller.constant
 		public static const RESET_BOUNDS:String = "resetBounds";
 		public static const PLAY_VIDEO:String = "playVideo";
 		public static const CLOSE_VIDEO:String = "closeVideo";
+		public static const NAV_TO_SITE:String = "navToSite";
 	}
 }
